@@ -2,8 +2,8 @@
 const yargs = require('yargs');
 const shell = require('shelljs');
 
-const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects'];
-const files = ['script.ts', 'functions.ts']
+const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects', 'tsconfig.json'];
+const files = ['script.ts', 'functions.ts'];
 if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.log("Initialising HeckLib, please wait.\nThis might take a while.\n")
     console.time("HeckLib initialised in");
