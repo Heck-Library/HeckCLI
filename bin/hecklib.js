@@ -1,37 +1,45 @@
 #! /usr/bin/env node
 const yargs = require('yargs');
 const shell = require('shelljs');
+
+const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects'];
+const files = ['script.ts', 'functions.ts']
 if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.log("Initialising HeckLib, please wait.\nThis might take a while.\n")
-    console.time("HeckLib initialised in: ");
-    shell.exec('rm -R -f .vscode');
-    shell.exec('rm -R -f cinema');
-    shell.exec('rm -R -f consts');
-    shell.exec('rm -R -f environment');
-    shell.exec('rm -R -f events');
-    shell.exec('rm -R -f functions');
-    shell.exec('rm -R -f info');
-    shell.exec('rm -R -f map');
-    shell.exec('rm -R -f model');
-    shell.exec('rm -R -f node_modules')
-    shell.exec('rm -R -f objects')
-    shell.exec('mkdir tmp && git clone https://github.com/Heck-Library/HeckLib/ tmp && cp -r tmp/.vscode . && cp -r tmp/cinema . && cp -r tmp/consts . && cp -r tmp/environment . && cp -r tmp/events . && cp -r tmp/functions . && cp -r tmp/info . && cp -r tmp/map . && cp -r tmp/model . && cp -r tmp/node_modules . && cp -r tmp/objects . &&  cp -r tmp/script.ts . && cp -r tmp/functions.ts .');
-    shell.exec('rm -R -f tmp');
+    console.time("HeckLib initialised in");
+    shell.exec(`rm -rf ${folders.join(" ")}`);
+
+    console.log("Downloading new modules...");
+    console.time("Modules downloaded in")
+    shell.exec(`git clone --depth=1 --single-branch https://github.com/Heck-Library/HeckLib/ tmp`);
+    console.timeEnd("Modules downloaded in")
+    
+    console.log("Copying modules...");
+    console.time("Modules copied in")
+    shell.exec(`cp -r tmp/{${folders.join(",")}} .`);
+    shell.exec(`cp -r tmp/{${files.join(",")}} .`);
+    console.timeEnd("Modules copied in")
+
+    shell.exec('rm -rf tmp');
 } else if (['u', 'update'].includes(yargs.argv._[0])) {
     console.log("Updating HeckLib, please wait. \x1b[31mPlease, don't edit any files while updating.\n\x1b[0mThis might take a while.\n")
-    console.time("HeckLib updated in: ");
-    shell.exec('rm -R -f .vscode');
-    shell.exec('rm -R -f cinema');
-    shell.exec('rm -R -f consts');
-    shell.exec('rm -R -f environment');
-    shell.exec('rm -R -f events');
-    shell.exec('rm -R -f functions');
-    shell.exec('rm -R -f info');
-    shell.exec('rm -R -f map');
-    shell.exec('rm -R -f model');
-    shell.exec('rm -R -f node_modules')
-    shell.exec('rm -R -f objects')
-    shell.exec('mkdir tmp && git clone https://github.com/Heck-Library/HeckLib/ tmp && cp -r tmp/.vscode . && cp -r tmp/cinema . && cp -r tmp/consts . && cp -r tmp/environment . && cp -r tmp/events . && cp -r tmp/functions . && cp -r tmp/info . && cp -r tmp/map . && cp -r tmp/model . && cp -r tmp/node_modules . && cp -r tmp/objects .');
+    console.time("HeckLib updated in");
+
+    console.log("Uninstalling modules...");
+    console.time("Modules uninstalled in");
+    shell.exec(`rm -rf ${folders.join(" ")}`);
+    console.timeEnd("Modules uninstalled in")
+
+    console.log("Downloading new modules...");
+    console.time("Modules downloaded in")
+    shell.exec(`git clone --depth=1 https://github.com/Heck-Library/HeckLib/ tmp`);
+    console.timeEnd("Modules downloaded in")
+
+    console.log("Copying modules...");
+    console.time("Modules copied in")
+    shell.exec(`cp -r tmp/{${folders.join(",")}} .`);
+    console.timeEnd("Modules copied in")
+
     shell.exec('rm -R -f tmp');
 } else {
     console.log(" \x1b[5m\x1b[35m\x1b[1m __  __                 __      \x1b[37m__           __        ")
@@ -54,5 +62,5 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 sleep(10)
-if (['u', 'update'].includes(yargs.argv._[0])) console.timeEnd("HeckLib updated in: ");
-if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) console.timeEnd("HeckLib initialised in: ");
+if (['u', 'update'].includes(yargs.argv._[0])) console.timeEnd("HeckLib updated in");
+if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) console.timeEnd("HeckLib initialised in");
