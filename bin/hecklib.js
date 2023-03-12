@@ -11,7 +11,7 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
 
     console.log("Downloading new modules...");
     console.time("Modules downloaded in")
-    shell.exec(`git clone --depth=1 --single-branch https://github.com/Heck-Library/HeckLib/ tmp`);
+    shell.exec(`git clone --depth=1 https://github.com/Heck-Library/HeckLib/ tmp`);
     console.timeEnd("Modules downloaded in")
     
     console.log("Copying modules...");
@@ -20,7 +20,7 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     shell.exec(`cp -r tmp/{${files.join(",")}} .`);
     console.timeEnd("Modules copied in")
 
-    shell.exec('rm -rf tmp');
+    shell.exec('sleep 1 && rm -rf tmp');
 } else if (['u', 'update'].includes(yargs.argv._[0])) {
     console.log("Updating HeckLib, please wait. \x1b[31mPlease, don't edit any files while updating.\n\x1b[0mThis might take a while.\n")
     console.time("HeckLib updated in");
@@ -40,7 +40,7 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     shell.exec(`cp -r tmp/{${folders.join(",")}} .`);
     console.timeEnd("Modules copied in")
 
-    shell.exec('rm -R -f tmp');
+    shell.exec('sleep 1 && rm -rf tmp');
 } else {
     console.log(" \x1b[5m\x1b[35m\x1b[1m __  __                 __      \x1b[37m__           __        ")
     console.log(" \x1b[35m/\\ \\/\\ \\               /\\ \\  _ \x1b[37m/\\ \\       __/\\ \\       ")
