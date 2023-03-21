@@ -4,7 +4,15 @@ const shell = require('shelljs');
 
 const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects', 'tsconfig.json'];
 const files = ['script.ts', 'functions.ts'];
-if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
+
+if (['r', 'requirements', 'req', 'first', 'first_time', 'firstTime', 'ft', 'f'].includes(yargs.argv._[0])) {
+    console.log("Performing first time setup, installing required modules.")
+    console.log("Please wait, this might take a while.")
+    console.time("HeckLib first time setup performed in");
+
+    shell.exec('npm i -g ts-node');
+    shell.exec('npm i -g nodemon');
+} else if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.log("Initialising HeckLib, please wait.\nThis might take a while.\n")
     console.time("HeckLib initialised in");
     shell.exec(`rm -rf ${folders.join(" ")}`);
@@ -41,6 +49,9 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.timeEnd("Modules copied in")
 
     shell.exec('sleep 1 && rm -rf tmp');
+} else if (yargs.argv._[0]) {
+    console.log("Running HeckLib");
+    shell.exec(`nodemon ${yargs.argv._[0]}`)
 } else {
     console.log(" \x1b[5m\x1b[35m\x1b[1m __  __                 __      \x1b[37m__           __        ")
     console.log(" \x1b[35m/\\ \\/\\ \\               /\\ \\  _ \x1b[37m/\\ \\       __/\\ \\       ")
