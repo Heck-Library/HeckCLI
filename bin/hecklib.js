@@ -53,7 +53,7 @@ if (['r', 'requirements', 'req', 'first', 'first_time', 'firstTime', 'ft', 'f'].
     if (yargs.argv._[1] == 'notemplates') shell.exec(`rm -rf effect`);
 } else if (yargs.argv._[0]) {
     console.log("Running HeckLib");
-    shell.exec(`nodemon ${yargs.argv._[0]}`)
+    shell.exec(`nodemon ${yargs.argv._[0]} -e ts`)
 } else {
     console.log(" \x1b[5m\x1b[35m\x1b[1m __  __                 __      \x1b[37m__           __        ")
     console.log(" \x1b[35m/\\ \\/\\ \\               /\\ \\  _ \x1b[37m/\\ \\       __/\\ \\       ")
