@@ -2,7 +2,7 @@
 const yargs = require('yargs');
 const shell = require('shelljs');
 
-const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects', 'tsconfig.json'];
+const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects', 'tsconfig.json', 'effect'];
 const files = ['script.ts', 'functions.ts'];
 if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.log("Initialising HeckLib, please wait.\nThis might take a while.\n")
@@ -21,6 +21,7 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.timeEnd("Modules copied in")
 
     shell.exec('sleep 1 && rm -rf tmp');
+    if (yargs.argv._[1] == 'notemplates') shell.exec(`rm -rf effect`);
 } else if (['u', 'update'].includes(yargs.argv._[0])) {
     console.log("Updating HeckLib, please wait. \x1b[31mPlease, don't edit any files while updating.\n\x1b[0mThis might take a while.\n")
     console.time("HeckLib updated in");
@@ -41,6 +42,7 @@ if (['i', 'initialize', 'init', 'install'].includes(yargs.argv._[0])) {
     console.timeEnd("Modules copied in")
 
     shell.exec('sleep 1 && rm -rf tmp');
+    if (yargs.argv._[1] == 'notemplates') shell.exec(`rm -rf effect`);
 } else {
     console.log(" \x1b[5m\x1b[35m\x1b[1m __  __                 __      \x1b[37m__           __        ")
     console.log(" \x1b[35m/\\ \\/\\ \\               /\\ \\  _ \x1b[37m/\\ \\       __/\\ \\       ")
