@@ -2,7 +2,7 @@
 const yargs = require('yargs');
 const shell = require('shelljs');
 
-const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'node_modules', 'objects', 'tsconfig.json', 'effect'];
+const folders = ['.vscode', 'cinema', 'consts', 'environment', 'events', 'functions', 'info', 'map', 'model', 'objects', 'tsconfig.json', 'effect'];
 const files = ['script.ts', 'functions.ts'];
 
 if (['r', 'requirements', 'req', 'first', 'first_time', 'firstTime', 'ft', 'f'].includes(yargs.argv._[0])) {
@@ -26,6 +26,7 @@ if (['r', 'requirements', 'req', 'first', 'first_time', 'firstTime', 'ft', 'f'].
     console.time("Modules copied in")
     shell.exec(`cp -r tmp/{${folders.join(",")}} .`);
     shell.exec(`cp -r tmp/{${files.join(",")}} .`);
+    shell.exec("npm i @types/node");
     console.timeEnd("Modules copied in")
 
     shell.exec('sleep 1 && rm -rf tmp');
@@ -47,6 +48,7 @@ if (['r', 'requirements', 'req', 'first', 'first_time', 'firstTime', 'ft', 'f'].
     console.log("Copying modules...");
     console.time("Modules copied in")
     shell.exec(`cp -r tmp/{${folders.join(",")}} .`);
+    shell.exec("npm i @types/node");
     console.timeEnd("Modules copied in")
 
     shell.exec('sleep 1 && rm -rf tmp');
